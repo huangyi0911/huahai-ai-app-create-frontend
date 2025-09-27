@@ -21,17 +21,18 @@
 
 <script setup lang="ts">
 import BasicLayout from '@/layout/BasicLayout.vue'
-import { healthCheck } from '@/api/healthController.ts'
+// import { healthCheck } from '@/api/healthController.ts'
 import router from '@/router'
 import { ArrowLeftOutlined } from '@ant-design/icons-vue'
 import { h } from 'vue'
 import dayjs from 'dayjs'
 import zhCN from 'ant-design-vue/es/locale/zh_CN' // 引入 ant-design-vue 的中文语言包
+import { useLoginUserStore } from '@/stores/loginUser.ts'
 
-// 获取健康检查信息
-healthCheck().then((res) => {
-  console.log(res.data)
-})
+// // 获取健康检查信息
+// healthCheck().then((res) => {
+//   console.log(res.data)
+// })
 
 dayjs.locale('zh-cn')
 // 使用 Composition API 和 setup 函数定义响应式数据
@@ -41,6 +42,11 @@ const appLocale = zhCN // 设置当前应用的语言环境
 const handleBack = () => {
   router.back()
 }
+
+// 获取当前登录用户信息
+const loginUserStore = useLoginUserStore()
+loginUserStore.fetchLoginUser()
+
 </script>
 
 <style>
