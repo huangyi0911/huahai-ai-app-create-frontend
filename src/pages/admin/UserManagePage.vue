@@ -1,28 +1,24 @@
 <template>
   <div id="userManagePage">
-    <div id="userManagePage">
-      <!-- 搜索表单 -->
-      <a-form layout="inline" :model="searchParams" @finish="doSearch">
-        <a-form-item label="账号">
-          <a-input v-model:value="searchParams.userAccount" placeholder="输入账号" allow-clear/>
-        </a-form-item>
-        <a-form-item label="用户名">
-          <a-input v-model:value="searchParams.userName" placeholder="输入用户名" allow-clear/>
-        </a-form-item>
-        <a-form-item>
-          <a-button type="primary" html-type="submit">搜索</a-button>
-        </a-form-item>
-      </a-form>
-      <a-divider />
-    </div>
-
+    <!-- 搜索表单 -->
+    <a-form layout="inline" :model="searchParams" @finish="doSearch">
+      <a-form-item label="账号">
+        <a-input v-model:value="searchParams.userAccount" placeholder="输入账号" />
+      </a-form-item>
+      <a-form-item label="用户名">
+        <a-input v-model:value="searchParams.userName" placeholder="输入用户名" />
+      </a-form-item>
+      <a-form-item>
+        <a-button type="primary" html-type="submit">搜索</a-button>
+      </a-form-item>
+    </a-form>
+    <a-divider />
     <!-- 表格 -->
     <a-table
       :columns="columns"
       :data-source="data"
       :pagination="pagination"
       @change="doTableChange"
-      bordered
     >
       <template #bodyCell="{ column, record }">
         <template v-if="column.dataIndex === 'userAvatar'">
@@ -97,7 +93,7 @@ const columns = [
   },
 ]
 
-// 数据
+// 展示的数据
 const data = ref<API.UserVO[]>([])
 const total = ref(0)
 
@@ -120,11 +116,6 @@ const fetchData = async () => {
   }
 }
 
-// 页面加载时请求一次
-onMounted(() => {
-  fetchData()
-})
-
 // 分页参数
 const pagination = computed(() => {
   return {
@@ -136,14 +127,14 @@ const pagination = computed(() => {
   }
 })
 
-// 表格变化处理
-const doTableChange = (page: any) => {
+// 表格分页变化时的操作
+const doTableChange = (page: { current: number; pageSize: number }) => {
   searchParams.pageNum = page.current
   searchParams.pageSize = page.pageSize
   fetchData()
 }
 
-// 获取数据
+// 搜索数据
 const doSearch = () => {
   // 重置页码
   searchParams.pageNum = 1
@@ -165,10 +156,17 @@ const doDelete = async (id: string) => {
     message.error('删除失败')
   }
 }
+
+// 页面加载时请求一次
+onMounted(() => {
+  fetchData()
+})
 </script>
 
 <style scoped>
 #userManagePage {
-  width: 100% !important;
+  padding: 24px;
+  background: white;
+  margin-top: 16px;
 }
 </style>

@@ -38,7 +38,6 @@
               </template>
             </a-dropdown>
           </div>
-
           <div v-else>
             <a-button type="primary" href="/user/login">登录</a-button>
           </div>
@@ -53,8 +52,8 @@ import { computed, h, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { type MenuProps, message } from 'ant-design-vue'
 import { useLoginUserStore } from '@/stores/loginUser.ts'
-import { LogoutOutlined, HomeOutlined } from '@ant-design/icons-vue'
 import { userLogout } from '@/api/userController.ts'
+import { LogoutOutlined, HomeOutlined } from '@ant-design/icons-vue'
 
 const router = useRouter()
 
@@ -80,6 +79,11 @@ const originItems = [
     key: '/admin/userManage',
     label: '用户管理',
     title: '用户管理',
+  },
+  {
+    key: '/admin/appManage',
+    label: '应用管理',
+    title: '应用管理',
   },
   {
     key: 'others',
@@ -116,7 +120,7 @@ const handleMenuClick: MenuProps['onClick'] = (e) => {
   }
 }
 
-// 用户注销
+// 退出登录
 const doLogout = async () => {
   const res = await userLogout()
   if (res.data.code === 0) {

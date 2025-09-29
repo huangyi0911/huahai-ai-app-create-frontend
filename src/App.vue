@@ -27,7 +27,6 @@ import { ArrowLeftOutlined } from '@ant-design/icons-vue'
 import { h } from 'vue'
 import dayjs from 'dayjs'
 import zhCN from 'ant-design-vue/es/locale/zh_CN' // 引入 ant-design-vue 的中文语言包
-import { useLoginUserStore } from '@/stores/loginUser.ts'
 
 // // 获取健康检查信息
 // healthCheck().then((res) => {
@@ -42,16 +41,31 @@ const appLocale = zhCN // 设置当前应用的语言环境
 const handleBack = () => {
   router.back()
 }
-
-// 获取当前登录用户信息
-const loginUserStore = useLoginUserStore()
-loginUserStore.fetchLoginUser()
-
 </script>
 
 <style>
+/* 全局样式优化 */
 #app {
 
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
+    'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+html {
+  overflow-x: hidden;
 }
 
 /* 返回按钮容器：固定在右下角 */
@@ -80,7 +94,7 @@ loginUserStore.fetchLoginUser()
   background-color: #5e4caf;
   border-color: #6777b4;
   transform: translateY(-3px); /* 上移效果 */
-  box-shadow: 0 6px 16px rgba(53, 7, 148, 0.3); /* 阴影加深 */
+  box-shadow: 0 6px 16px rgba(53, 7, 148, 0.3);
   /* 移除hover状态的border-radius修改，保持圆形 */
 }
 </style>

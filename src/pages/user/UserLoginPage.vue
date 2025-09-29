@@ -31,22 +31,21 @@
     </a-form>
   </div>
 </template>
-
-<script setup lang="ts">
+<script lang="ts" setup>
 import { reactive } from 'vue'
+import { userLogin } from '@/api/userController.ts'
 import { useLoginUserStore } from '@/stores/loginUser.ts'
 import { useRouter } from 'vue-router'
-import { userLogin } from '@/api/userController.ts'
 import { message } from 'ant-design-vue'
-
-const router = useRouter()
-const loginUserStore = useLoginUserStore()
 
 // 定义用户输入的表单信息
 const formState = reactive<API.UserLoginRequest>({
   userAccount: '',
   userPassword: '',
 })
+
+const router = useRouter()
+const loginUserStore = useLoginUserStore()
 
 /**
  * 提交表单
@@ -70,9 +69,10 @@ const handleSubmit = async (values: any) => {
 
 <style scoped>
 #userLoginPage {
-  min-width: 480px;
+  background: white;
   max-width: 720px;
-  margin: 0 auto;
+  padding: 24px;
+  margin: 24px auto;
 }
 
 .title {
@@ -87,9 +87,9 @@ const handleSubmit = async (values: any) => {
 }
 
 .tips {
-  margin-bottom: 16px;
+  text-align: right;
   color: #bbb;
   font-size: 13px;
-  text-align: right;
+  margin-bottom: 16px;
 }
 </style>
