@@ -3,7 +3,7 @@
     <div class="app-preview">
       <img v-if="app.cover" :src="app.cover" :alt="app.appName" />
       <div v-else class="app-placeholder">
-        <span>🤖</span>
+        <a-image src="https://picsum.photos/480/240"/>
       </div>
       <div class="app-overlay">
         <a-space>
